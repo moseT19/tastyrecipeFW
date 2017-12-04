@@ -42,6 +42,8 @@ At this point you can either gently fold in the blueberries, or wait until you p
 
                     <?php echo form_close(); ?>
                     <?php endif; ?>
+
+                 <?php } endforeach; ?>
                 <?php if($this->session->userdata('username')) : ?>
                 <?php echo validation_errors(); ?>
                 <?php echo form_open('comments/createCom'); ?>
