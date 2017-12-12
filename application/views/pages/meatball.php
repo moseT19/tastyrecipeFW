@@ -29,7 +29,7 @@
              </ul>
              </div>
             <div class="comments">
-                <h3>Comments</h3>
+                <h3>Commentsshibakel</h3>
                 <?php
                     foreach($comments as $comment) : if($comment['recipe'] == 'meatball'){?>
                         <div class="comment" >
@@ -46,14 +46,17 @@
                  <?php } endforeach; ?>
                 <?php if($this->session->userdata('username')) : ?>
                 <?php echo validation_errors(); ?>
-                <?php echo form_open('comments/createCom'); ?>
+
+                <?php echo form_open_multipart('comments/createCom', array('class' => 'ajax')); ?>
                  <div id="commentform">
                      <h4>Write a comment here :</h4><textarea type = "text" name = "body" pattern="[a-zA-Z0-9]+" class = ""></textarea><br /><br />
-                     <button type = "submit" >Comment</button><br />
+                     <button type = "submit" id="submit-btn">Comment</button><br />
                      <input type="hidden" name="recipe" value="meatball";>
+                     <input type="hidden" name="username" value="<?php echo $this->session->userdata('username'); ?>";>
                  </div>
                 <?php echo form_close(); ?>
                 <?php endif; ?>
             </div>
+
 
         </div>

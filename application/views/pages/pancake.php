@@ -46,7 +46,7 @@ At this point you can either gently fold in the blueberries, or wait until you p
                  <?php } endforeach; ?>
                 <?php if($this->session->userdata('username')) : ?>
                 <?php echo validation_errors(); ?>
-                <?php echo form_open('comments/createCom'); ?>
+                <?php echo form_open_multipart('comments/createCom', 'class="ajax"'); ?>
                  <div id="commentform">
                      <h4>Write a comment here :</h4><textarea type = "text" name = "body" pattern="[a-zA-Z0-9]+" class = ""></textarea><br /><br />
                      <button type = "submit" >Comment</button><br />

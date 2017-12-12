@@ -1,5 +1,31 @@
 <?php
 	class Comments extends CI_Controller{
+
+        public function showAllComments(){
+            $res = $this->comments_model->showAllComments();
+            echo json_encode($res);
+        }
+
+        public function addComment(){
+            $result = $this->m->addEmployee();
+            $msg['success'] = false;
+            $msg['type'] = 'add';
+            if($result){
+                $msg['success'] = true;
+            }
+            echo json_encode($msg);
+        }
+
+        public function deleteEmployee(){
+            $result = $this->m->deleteEmployee();
+            $msg['success'] = false;
+            if($result){
+                $msg['success'] = true;
+            }
+            echo json_encode($msg);
+	   }
+        //without js
+        /*
 		public function createCom(){
 
             $recipe = $this->input->post('recipe');
@@ -25,6 +51,6 @@
             $this->session->set_flashdata('comment_deleted', 'Your comment has been deleted.');
             redirect($recipe);
         }
-
+        */
 
 	}
