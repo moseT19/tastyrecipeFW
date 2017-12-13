@@ -28,34 +28,34 @@
 
              </ul>
              </div>
-            <div class="comments">
+            <div id="comment">
                 <h3>Commentsshibakel</h3>
-                <?php
-                    foreach($comments as $comment) : if($comment['recipe'] == 'meatball'){?>
-                        <div class="comment" >
-                                    <h4><?php echo $comment['username']; ?></h4>
-                                    <p><?php echo $comment['comment'] ?></p>
-                        </div>
-                    <?php if($this->session->userdata('username') == $comment['username']) : ?>
-                    <?php echo form_open('comments/deleteCom/'.$comment['id']); ?>
-                    <button type="submit"  value="Delete">Delete</button>
-
-                    <?php echo form_close(); ?>
-                    <?php endif; ?>
-
-                 <?php } endforeach; ?>
-                <?php if($this->session->userdata('username')) : ?>
-                <?php echo validation_errors(); ?>
-
-                <?php echo form_open_multipart('comments/createCom', array('class' => 'ajax')); ?>
-                 <div id="commentform">
-                     <h4>Write a comment here :</h4><textarea type = "text" name = "body" pattern="[a-zA-Z0-9]+" class = ""></textarea><br /><br />
-                     <button type = "submit" id="submit-btn">Comment</button><br />
-                     <input type="hidden" name="recipe" value="meatball";>
-                     <input type="hidden" name="username" value="<?php echo $this->session->userdata('username'); ?>";>
-                 </div>
-                <?php echo form_close(); ?>
+                <?php if($this->session->userdata('logged_in')) : ?>
+                <button id="showForm">Add comment</button>
                 <?php endif; ?>
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add a comment</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addForm" action="" method="POST">
+                                    <input id="foodcomment" type="hidden" name="recipe" value="meatball";>
+                                    <input id="username" type="hidden" name="username" value="<?php echo $this->session->userdata('username') ?>";>
+                                    <textarea name="comment"></textarea>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="addcomment">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="commentarea">
+
             </div>
 
 

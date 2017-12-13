@@ -16,21 +16,29 @@ class comments_model extends CI_Model{
         }
     }
 
-    public function create_comment($food){
+    public function addComment(){
 
-        $comment = htmlspecialchars($this->input->post('body'));
+        $comment = htmlspecialchars($this->input->post('comment'));
 
-        $data = array('username' => $this->session->userdata('username'), 'comment' => $comment, 'recipe' => $food);
-        return $this->db->insert('comments', $data);
+        $data = array('username' => $this->session->userdata('username'), 'comment' => $comment, 'recipe' => $this->input->post('recipe'));
+        $this->db->insert('comments', $data);
+        if($this->db->affected_rows() > 0)
+            return true;
+        else
+            return false;
     }
-    public function delete_comment($id){
+    public function deleteComment(){
 
-
+        $id = $this->input->get('id');
         $comment_query = $this->db->query("SELECT * FROM comments WHERE id = '$id'");
         if($comment_query->row(0)->username == $this->session->userdata('username')){
 
             $this->db->query("DELETE FROM comments WHERE id = '$id'");
-            return true;
+            if($this->db->affected_rows() > 0)
+                return true;
+            else
+                return false;
+
         }else{
             die('You cannot delete this comment!');
         }

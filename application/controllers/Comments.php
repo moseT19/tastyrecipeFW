@@ -7,7 +7,7 @@
         }
 
         public function addComment(){
-            $result = $this->m->addEmployee();
+            $result = $this->comments_model->addComment();
             $msg['success'] = false;
             $msg['type'] = 'add';
             if($result){
@@ -16,8 +16,8 @@
             echo json_encode($msg);
         }
 
-        public function deleteEmployee(){
-            $result = $this->m->deleteEmployee();
+        public function deleteComment(){
+            $result = $this->comments_model->deleteComment();
             $msg['success'] = false;
             if($result){
                 $msg['success'] = true;

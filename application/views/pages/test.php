@@ -28,108 +28,34 @@
 
              </ul>
              </div>
-            <div id="comments">
+            <div id="comment">
                 <h3>Commentsshibakel</h3>
+                <?php if($this->session->userdata('logged_in')) : ?>
+                <button id="showForm">Add comment</button>
+                <?php endif; ?>
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add a comment</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addForm" action="" method="POST">
+                                    <input id="foodcomment" type="hidden" name="recipe" value="meatball";>
+                                    <input id="username" type="hidden" name="username" value="<?php echo $this->session->userdata('username') ?>";>
+                                    <textarea name="comment"></textarea>
 
-
-
-                <form id="thisForm" action="<?php echo base_url() ?>comments/createCom" method="post">
-                 <div id="commentform">
-                     <h4>Write a comment here :</h4><textarea type = "text" name = "comment" pattern="[a-zA-Z0-9]+" class = ""></textarea><br /><br />
-                     <button type = "submit" id="submit-btn">Comment</button><br />
-                     <input type="hidden" name="recipe" value="meatball";>
-                     <input type="hidden" name="username" value="<?php echo $this->session->userdata('username'); ?>";>
-                 </div>
-                </form>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="addcomment">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <form id="thisForm" action="<?php echo base_url() ?>comments/createCom" method="post">
-                 <div id="commentform">
-                     <h4>Write a comment here :</h4><textarea type = "text" name = "comment" pattern="[a-zA-Z0-9]+" class = ""></textarea><br /><br />
-                     <button type = "submit" id="submit-btn">Comment</button><br />
-                     <input type="hidden" name="recipe" value="meatball";>
-                     <input type="hidden" name="username" value="<?php echo $this->session->userdata('username'); ?>";>
-                 </div>
-                </form>
+            <div id="commentarea">
 
+            </div>
         </div>
-<script>
-    $(function(){
 
-    showAllComments('meatball');
-
-    //add commment with validation
-    $('#addcomment').click(function(){
-       var url = $('#thisForm').attr('action'),
-           data = $('#thisForm').serialize();
-
-        var comment = $('input[name=comment]'),
-            validate = '';
-
-        if(comment.val() == ''){
-            comment.parent().parent().addClass('has-error');
-        }
-        else{
-            comment.parent().parent().removeClass('has-error');
-            validate+='2+2=4-1=3'
-        }
-
-        if(validate == '2+2=4-1=3'){
-            $.ajax({
-               type: 'ajax',
-					method: 'post',
-					url: url,
-					data: data,
-					async: false,
-					dataType: 'json',
-					success: function(response){
-						if(response.success){
-							$('#thisForm')[0].reset();
-							$('.alert-success').html('Comment added successfully').fadeIn().delay(4000).fadeOut('slow');
-							showAllComments();
-						}else{
-							alert('Error');
-						}
-					},
-					error: function(){
-						alert('Could not add data');
-					}
-            });
-        }
-
-    });
-
-    //function
-		function showAllComments(recipe){
-			$.ajax({
-				type: 'ajax',
-				url: '<?php echo base_url() ?>comments/showAllComments',
-				async: false,
-				dataType: 'json',
-				success: function(data){
-					var htmlOutput = '',
-                        deletebtn = '',
-                        i;
-					for(i=0; i<data.length; i++){
-                        deletebtn = '';
-                        if('<?php echo $this->session->userdata('username') ?>' == data[i].username){
-                            deletebtn += '<a href="javascript:;" class="deletebtn" data="'+data[i].id+'">Delete</a>';
-                        }
-                        if(data[i].recipe == recipe){
-                            htmlOutput += ' <div class="comment" ><h4>'+data[i].username+'</h4><p>'+data[i].comment+'</p>'+deletebtn+'</div>';
-                        }
-
-					}
-					$('#comments').html(htmlOutput);
-				},
-				error: function(){
-					alert('Could not get Data from Database');
-				}
-			});
-		}
-
-
-
-
-});
-
-</script>
