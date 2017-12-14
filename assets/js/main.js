@@ -11,21 +11,21 @@ $(document).ready(function(){
     $('#addcomment').click(function(e){
 
 
-       var url = $('#addForm').attr('action'),
-           data = $('#addForm').serialize();
+       var url = $('#addForm').attr('action');
+       var data = $('#addForm').serialize();
 
-        var comment = $('input[name=comment]'),
-            validate = '';
+        var comment = $('textarea[name=comment]');
+        var validate = "";
 
         if(comment.val() == ''){
             comment.parent().parent().addClass('has-error');
         }
         else{
             comment.parent().parent().removeClass('has-error');
-            validate+='2+2=4-1=3'
+            validate+='1';
         }
 
-        if(validate == '2+2=4-1=3'){
+        if(validate == '1'){
             $.ajax({
                type: 'ajax',
 					method: 'post',
@@ -54,6 +54,7 @@ $(document).ready(function(){
             });
 
         }
+
 
     });
 

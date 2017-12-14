@@ -438,6 +438,18 @@ span.psw {
     padding-top: 16px;
 }
 
+.has-error {
+    border:5px solid #fa0e0e;
+}
+
+.alert-success {
+    display: none;
+    width: 100%;
+    text-align: center;
+    font-size: 200%;
+    background-color: greenyellow;
+}
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

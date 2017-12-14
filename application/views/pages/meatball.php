@@ -29,6 +29,7 @@
              </ul>
              </div>
             <div id="comment">
+                <div class="alert-success" ></div>
                 <h3>Commentsshibakel</h3>
                 <?php if($this->session->userdata('logged_in')) : ?>
                 <button id="showForm">Add comment</button>
