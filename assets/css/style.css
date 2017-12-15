@@ -25,6 +25,9 @@ a:visited {
     text-decoration: none;
 
 }
+.deletebtn {
+    color: #f6626e;
+}
 #header a{
     list-style-type: none;
     text-decoration: none;
